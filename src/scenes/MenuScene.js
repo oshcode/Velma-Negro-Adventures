@@ -19,21 +19,21 @@ class MenuScene extends Phaser.Scene {
 
         // Fun colorful title
         const title1 = this.add.text(width / 2, 70, "VELMA & NEGRO'S", {
-            fontSize: '20px',
+            fontSize: '45px',
             fontFamily: 'Arial, sans-serif',
             fontStyle: 'bold',
             fill: '#FF69B4',
             stroke: '#FFFFFF',
-            strokeThickness: 4
+            strokeThickness: 7
         }).setOrigin(0.5);
 
-        const title2 = this.add.text(width / 2, 100, 'ADVENTURES', {
-            fontSize: '24px',
+        const title2 = this.add.text(width / 2, 120, 'ADVENTURES', {
+            fontSize: '50px',
             fontFamily: 'Arial, sans-serif',
             fontStyle: 'bold',
             fill: '#00E5FF',
             stroke: '#FFFFFF',
-            strokeThickness: 4
+            strokeThickness: 7
         }).setOrigin(0.5);
 
         // Bounce animation
@@ -48,7 +48,7 @@ class MenuScene extends Phaser.Scene {
 
         this.tweens.add({
             targets: title2,
-            y: 103,
+            y: 117,
             duration: 1200,
             yoyo: true,
             repeat: -1,
@@ -56,8 +56,8 @@ class MenuScene extends Phaser.Scene {
         });
 
         // Instructions
-        this.add.text(width / 2, 140, 'Choose Your Friend!', {
-            fontSize: '14px',
+        this.add.text(width / 2, 180, 'Choose Your Friend!', {
+            fontSize: '20px',
             fontFamily: 'Arial, sans-serif',
             fontStyle: 'bold',
             fill: '#B865FF'

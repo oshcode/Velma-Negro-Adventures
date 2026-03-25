@@ -1,6 +1,7 @@
 class BootScene extends Phaser.Scene {
     constructor() {
         super({ key: 'BootScene' });
+        this.loadingElements = [];
     }
 
     preload() {
@@ -79,6 +80,9 @@ class BootScene extends Phaser.Scene {
         // Progress bar fill
         const progressBar = this.add.graphics();
 
+        // Store references for later cleanup
+        this.loadingElements.push(title1, title2, loadingText, progressBox, progressBar);
+
         // Decorative stars
         const stars = ['★', '✨', '💫', '⭐'];
         const starColors = ['#FF69B4', '#00E5FF', '#FFE135', '#B865FF'];
@@ -96,6 +100,7 @@ class BootScene extends Phaser.Scene {
             }).setOrigin(0.5);
 
             starObjs.push(starText);
+            this.loadingElements.push(starText);
 
             // Rotate and scale animation
             this.tweens.add({
@@ -122,12 +127,7 @@ class BootScene extends Phaser.Scene {
         });
 
         this.load.on('complete', () => {
-            progressBar.destroy();
-            progressBox.destroy();
-            loadingText.destroy();
-            title1.destroy();
-            title2.destroy();
-            starObjs.forEach(star => star.destroy());
+            // Loading complete - elements will be cleaned up in create() after delay
         });
 
         // Load assets
@@ -157,7 +157,13 @@ class BootScene extends Phaser.Scene {
     }
 
     create() {
-        // Start the menu scene
-        this.scene.start('MenuScene');
+        // Start the menu scene after a 2 second delay
+        this.time.delayedCall(2000, () => {
+            // Clean up loading screen elements
+            this.loadingElements.forEach(element => {
+                if (element) element.destroy();
+            });
+            this.scene.start('MenuScene');
+        });
     }
 }
